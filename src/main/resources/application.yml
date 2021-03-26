@@ -1,0 +1,64 @@
+
+#jsp的视图解析器
+spring:
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+  mvc:
+    view:
+      prefix: /jsps/
+      suffix: .jsp
+
+
+  #开启热部署
+  devtools:
+    restart:
+      enabled: true
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:static/,classpath:/public/,file:${web.upload-path}
+
+#数据源
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://39.102.94.192:3306/peixun_kaoshi?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&allowMultiQueries=true
+    url: jdbc:mysql://192.168.34.79:3306/pr?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&allowMultiQueries=true
+    username: root
+    password: root
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+#mybatis的配置
+mybatis:
+#1.读取mapping映射文件
+  mapper-locations: classpath:mapper/*.xml
+#2.驼峰命名
+  configuration:
+    map-underscore-to-camel-case: true
+    #3.懒加载
+    #lazy-loading-enabled: true
+    #4.起别名
+  type-aliases-package: com.buba.project.pojo
+
+
+
+server:
+  #修改端口号
+  port: 8080
+  max-http-header-size: 102400
+  tomcat:
+    max-http-post-size: 10MB
+
+#jsp的热部署
+  jsp-servlet:
+    init-parameters:
+      development: true
+#打印SQL语句
+logging:
+  level:
+    com:
+      bgs:
+        mapper: debug
+
+
+
